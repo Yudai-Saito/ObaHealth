@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  oba-health:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    environment:
+      LINE_ACCESS_TOKEN: ${LINE_ACCESS_TOKEN}
+      LINE_CHANNEL_SECRET: ${LINE_CHANNEL_SECRET}
+    restart: always
+    tty: true
+    entrypoint: python obahealth/app.py
